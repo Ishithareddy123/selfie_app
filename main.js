@@ -1,3 +1,4 @@
+
 var speechRecognition=window.webkitSpeechRecognition;
 var recognition= new speechRecognition();
 function start(){
@@ -9,4 +10,19 @@ recognition.onresult=function run(event){
     content=event.results[0][0].transcript;
     console.log(content);
     document.getElementById("textarea").innerHTML=content;
+    speak();
 }
+function speak(){
+    var synth=window.speechSynthesis;
+    var speech=document.getElementById("textarea").value;
+    var speakthis=new SpeechSynthesisUtterance(speech);
+    synth.speak(speakthis);
+    Webcam.attach(camera);
+}
+Webcam.set({
+    width:360,
+    height:240,
+    image_format:'png',
+    png_quality:90
+});
+camera=document.getElementById("camera");
